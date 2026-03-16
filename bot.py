@@ -16,26 +16,7 @@ ADMIN_ID = 7351189083
 # Yoki: https://your-domain.com/supermarket/index.html
 WEBAPP_URL = "https://dos-amber-eight.vercel.app/"
 
-app = Flask('')
 
-@app.route('/')
-def home():
-    return "Bot ishlayapti!"
-
-def run():
-    # Render avtomatik ravishda PORT o'zgaruvchisini beradi
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
-
-def start_server():
-    t = Thread(target=run)
-    t.start()
-
-# Botni ishga tushirishdan oldin serverni yoqing
-if __name__ == "__main__":
-    start_server()
-    # Bu yerda botingizning asosiy (polling) kodi bo'ladi
-    # Masalan: bot.polling()
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -107,7 +88,26 @@ def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     
     logger.info("Bot ishga tushdi...")
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot ishlayapti!"
+
+def run():
+    # Render avtomatik ravishda PORT o'zgaruvchisini beradi
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
+def start_server():
+    t = Thread(target=run)
+    t.start()
+
+# Botni ishga tushirishdan oldin serverni yoqing
+if __name__ == "__main__":
+    start_server()
+    # Bu yerda botingizning asosiy (polling) kodi bo'ladi
+    # Masalan: bot.polling()
 
 
 if __name__ == "__main__":
