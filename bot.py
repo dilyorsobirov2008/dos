@@ -8,7 +8,7 @@ import logging
 from telegram import Update, WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
-BOT_TOKEN = "8714108548:AAGnRXk-xKqGluK_EAZqUVjfFEdlW9EK6mI"
+BOT_TOKEN = "8714108548:AAFV9S6A49kGxT9Sm3mu3sY6TuMfuq0ix9E"
 ADMIN_ID = 7351189083
 
 # MINI APP URL - shu yerga o'zingizning hosting URL'ini qo'ying
