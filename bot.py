@@ -14,7 +14,7 @@ ADMIN_ID = 7351189083
 # MINI APP URL - shu yerga o'zingizning hosting URL'ini qo'ying
 # Masalan: https://yourname.github.io/supermarket/
 # Yoki: https://your-domain.com/supermarket/index.html
-WEBAPP_URL = "https://YOUR_HOSTING_URL/index.html"
+WEBAPP_URL = "https://dos-amber-eight.vercel.app/"
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
