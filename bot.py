@@ -5,17 +5,33 @@ Admin: 7351189083
 """
 
 import logging
+import os  # Portni olish uchun qo'shildi
+from flask import Flask  # Render porti uchun qo'shildi
+from threading import Thread  # Serverni parallel ishlatish uchun qo'shildi
 from telegram import Update, WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
-BOT_TOKEN = "8714108548:AAFV9S6A49kGxT9Sm3mu3sY6TuMfuq0ix9E"
+# --- PORT UCHUN QO'SHIMCHA ---
+flask_app = Flask('')
+
+@flask_app.route('/')
+def health_check():
+    return "Bot is alive!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 10000))
+    flask_app.run(host='0.0.0.0', port=port)
+
+def keep_alive():
+    t = Thread(target=run_flask)
+    t.daemon = True
+    t.start()
+# ------------------------------
+
+BOT_TOKEN = "8714108548:AAGnRXk-xKqGluK_EAZqUVjfFEdlW9EK6mI"
 ADMIN_ID = 7351189083
 
-# MINI APP URL - shu yerga o'zingizning hosting URL'ini qo'ying
-# Masalan: https://yourname.github.io/supermarket/
-# Yoki: https://your-domain.com/supermarket/index.html
 WEBAPP_URL = "https://dos-amber-eight.vercel.app/"
-
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -33,7 +49,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🛒 Do'konni ochish",
             web_app=WebAppInfo(url=WEBAPP_URL)
         )],
-        [InlineKeyboardButton("📞 Aloqa", url="@superrmarkettbot")]
+        [InlineKeyboardButton("📞 Aloqa", url="+998975062020")]
     ])
     
     await update.message.reply_text(
@@ -80,6 +96,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
+    # Render portini band qilishni boshlaymiz
+    keep_alive()
+
     app = Application.builder().token(BOT_TOKEN).build()
     
     app.add_handler(CommandHandler("start", start))
@@ -88,26 +107,7 @@ def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     
     logger.info("Bot ishga tushdi...")
-app = Flask('')
-
-@app.route('/')
-def home():
-    return "Bot ishlayapti!"
-
-def run():
-    # Render avtomatik ravishda PORT o'zgaruvchisini beradi
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
-
-def start_server():
-    t = Thread(target=run)
-    t.start()
-
-# Botni ishga tushirishdan oldin serverni yoqing
-if __name__ == "__main__":
-    start_server()
-    # Bu yerda botingizning asosiy (polling) kodi bo'ladi
-    # Masalan: bot.polling()
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
 if __name__ == "__main__":
