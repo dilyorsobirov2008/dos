@@ -32,7 +32,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🛒 Do'konni ochish",
             web_app=WebAppInfo(url=WEBAPP_URL)
         )],
-        [InlineKeyboardButton("📞 Aloqa", url="+998975062020")]
+        [InlineKeyboardButton("📞 Aloqa", url="@superrmarkettbot")]
     ])
     
     await update.message.reply_text(
