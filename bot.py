@@ -28,7 +28,7 @@ def keep_alive():
     t.start()
 # ------------------------------
 
-BOT_TOKEN = "8714108548:AAFhzro4aq6Oe7O1gujZCpYr8Z3eFvMZBqk"
+BOT_TOKEN = "8594969978:AAFkcjisCTPWFPfdhkl8WJHXULpzYz6d_Dc"
 ADMIN_ID = 7351189083
 
 WEBAPP_URL = "https://dos-amber-eight.vercel.app/"
